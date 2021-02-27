@@ -24,6 +24,7 @@ class KmlWriter {
     builder.processing('xml', 'version="1.0" encoding="UTF-8"');
     builder.element(KmlTagV22.kml, nest: () {
       builder.attribute('xmlns', 'http://www.opengis.net/kml/2.2');
+      builder.attribute('xmlns:gx', 'http://www.google.com/kml/ext/2.2');
 
       builder.element(KmlTagV22.document, nest: () {
         if (gpx.metadata != null) {
@@ -99,7 +100,7 @@ class KmlWriter {
       builder.element(KmlTagV22.track, nest: () {
         _writeElement(builder, KmlTagV22.extrude, 1);
         _writeElement(builder, KmlTagV22.tessellate, 1);
-        _writeElement(builder, KmlTagV22.altitudeMode, 'absolute');
+        _writeElement(builder, KmlTagV22.altitudeMode, 'clampToGround');
 
         _writeElement(
             builder,
@@ -128,7 +129,7 @@ class KmlWriter {
       builder.element(KmlTagV22.track, nest: () {
         _writeElement(builder, KmlTagV22.extrude, 1);
         _writeElement(builder, KmlTagV22.tessellate, 1);
-        _writeElement(builder, KmlTagV22.altitudeMode, 'absolute');
+        _writeElement(builder, KmlTagV22.altitudeMode, 'clampToGround');
 
         _writeElement(
             builder,
@@ -173,7 +174,7 @@ class KmlWriter {
 
         builder.element(KmlTagV22.point, nest: () {
           if (wpt.ele != null) {
-            _writeElement(builder, KmlTagV22.altitudeMode, 'absolute');
+            _writeElement(builder, KmlTagV22.altitudeMode, 'clampToGround');
           }
 
           _writeElement(builder, KmlTagV22.coordinates,
